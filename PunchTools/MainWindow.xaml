@@ -1,0 +1,54 @@
+﻿<Window x:Class="PunchTools.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PunchTools"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" >
+                <WrapPanel Name="ToolsWrapPanel" Orientation="Horizontal" Margin="3"></WrapPanel>
+            </ScrollViewer>
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="140"/>
+                </Grid.ColumnDefinitions>
+                <Menu Grid.Row="0" Grid.Column="0" Height="25" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                    <MenuItem Header="Меню" Height="25" >
+                        <MenuItem Header="Добавить" HorizontalAlignment="Left" Height="25" Click="MenuItem_Click_1" />
+                        <MenuItem Header="Выход" HorizontalAlignment="Left" Height="25" Click="MenuItem_Click" />
+                    </MenuItem>
+                    <MenuItem Header="Настройки" Height="25" >
+                        <MenuItem Header="Опции" HorizontalAlignment="Left" Height="25" />
+                        <MenuItem Header="Обновить" HorizontalAlignment="Left" Height="25" />
+                    </MenuItem>
+                </Menu>
+                <Image Grid.Column="1" Source="/3224985.png" />
+            </Grid>
+            
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="#FFDC861F">
+                
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>
