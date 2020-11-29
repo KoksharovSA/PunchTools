@@ -11,6 +11,26 @@ namespace PunchTools
 {
     internal static class DB
     {
+        internal static bool CreateDBTools(SQLiteConnection sQLiteConnection)
+        {
+            sQLiteConnection.Open();
+            try
+            {
+                SQLiteCommand command = sQLiteConnection.CreateCommand();
+
+                command.CommandText = "CREATE TABLE PuncherTools (NomenclatureNumberTools INTEGER NOT NULL, NameTools TEXT, TypeTools TEXT, SizesTools TEXT, Quantity INTEGER, MinQuantity INTEGER, MainSize REAL, MinMainSize REAL, PRIMARY KEY(NomenclatureNumberTools));";
+                command.ExecuteNonQuery();
+                sQLiteConnection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                sQLiteConnection.Close();
+                MessageBox.Show(ex.Message, "Ошибка");
+                return false;
+            }
+        }
+
         internal static bool AddDBTools(SQLiteConnection sQLiteConnection, Tools tools)
         {
             sQLiteConnection.Open();
