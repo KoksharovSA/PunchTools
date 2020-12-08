@@ -5,20 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PunchTools"
         mc:Ignorable="d"
-        Title="Add" Height="450" Width="800">
+        Title="Add" Height="281.25" Width="556.25">
     <Grid>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="153,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224"/>
-        <TextBlock Text="Номенклатурный номер" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="153,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224"/>
+        <TextBlock Text="Номер" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" Height="23" Margin="153,46,0,0" VerticalAlignment="Top" Width="224" IsEditable="True"/>
         <TextBlock Text="Название инструмента" HorizontalAlignment="Left" Margin="10,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock Text="Тип инструмента" HorizontalAlignment="Left" Margin="10,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="153,85,0,0" VerticalAlignment="Top" Width="224">
+        <ComboBox HorizontalAlignment="Left" Margin="153,85,0,0" VerticalAlignment="Top" Width="224" IsEditable="True">
             <ComboBoxItem Content="Пуансон"/>
+            <ComboBoxItem Content="Пуансон-вставка"/>
             <ComboBoxItem Content="Матрица"/>
             <ComboBoxItem Content="Съёмник"/>
             <ComboBoxItem Content="Юстировочное кольцо"/>
             <ComboBoxItem Content="Картридж"/>
+            <ComboBoxItem Content="Кластерный инструмент"/>
         </ComboBox>
+        <Image x:Name="ImageAdd" HorizontalAlignment="Left" Height="97" Margin="382,10,0,0" VerticalAlignment="Top" Width="156" RenderTransformOrigin="0.391,0.343" MouseRightButtonUp="ImageAdd_MouseRightButtonUp"/>
 
     </Grid>
 </Window>

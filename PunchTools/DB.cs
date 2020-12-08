@@ -18,7 +18,7 @@ namespace PunchTools
             {
                 SQLiteCommand command = sQLiteConnection.CreateCommand();
 
-                command.CommandText = "CREATE TABLE PuncherTools (NomenclatureNumberTools INTEGER NOT NULL, NameTools TEXT, TypeTools TEXT, SizesTools TEXT, Quantity INTEGER, MinQuantity INTEGER, MainSize REAL, MinMainSize REAL, PRIMARY KEY(NomenclatureNumberTools));";
+                command.CommandText = "CREATE TABLE PuncherTools (NomenclatureNumberTools INTEGER NOT NULL, NameTools TEXT(500), TypeTools TEXT, SizesTools TEXT, Quantity INTEGER, MinQuantity INTEGER, MainSize REAL, MinMainSize REAL, Note TEXT(500), PRIMARY KEY(NomenclatureNumberTools));";
                 command.ExecuteNonQuery();
                 sQLiteConnection.Close();
                 return true;
@@ -63,7 +63,7 @@ namespace PunchTools
                 while (sql.Read())
                 {
                     Tools tools = new Tools();
-                    tools.NomenclatureNumberTools = Convert.ToInt32(sql["NomenclatureNumberTools"]);
+                    tools.NomenclatureNumberTools = Convert.ToString(sql["NomenclatureNumberTools"]) ?? "";
                     tools.NameTools = Convert.ToString(sql["NameTools"]);
                     tools.TypeTools = Convert.ToString(sql["TypeTools"]);
                     tools.SizesTools = Convert.ToString(sql["SizesTools"]);
@@ -71,6 +71,7 @@ namespace PunchTools
                     tools.MinQuantity = Convert.ToInt32(sql["MinQuantity"]);
                     tools.MainSize = Convert.ToDouble(sql["MainSize"]);
                     tools.MinMainSize = Convert.ToDouble(sql["MinMainSize"]);
+                    tools.Note = Convert.ToString(sql["Note"]);
                     toolses.Add(tools);
                 }
                 sql.Close();

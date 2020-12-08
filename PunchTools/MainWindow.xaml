@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PunchTools"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        AllowsTransparency="True" Background="{x:Null}" 
+        Title="MainWindow" Height="450" Width="800" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip">
+    <Grid Background="White">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
@@ -17,15 +18,15 @@
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" >
-                <WrapPanel Name="ToolsWrapPanel" Orientation="Horizontal" Margin="3"></WrapPanel>
+            <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <WrapPanel Name="ToolsWrapPanel" Orientation="Horizontal" Margin="3" ></WrapPanel>
             </ScrollViewer>
-            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="140"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="68"/>
                 </Grid.ColumnDefinitions>
-                <Menu Grid.Row="0" Grid.Column="0" Height="25" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                <Menu Grid.Row="0" Grid.Column="0" Width="Auto" Background="#FFECECEC" BorderBrush="#FFA4A2A2" BorderThickness="1,1,0,1">
                     <MenuItem Header="Меню" Height="25" >
                         <MenuItem Header="Добавить" HorizontalAlignment="Left" Height="25" Click="MenuItem_Click_1" />
                         <MenuItem Header="Выход" HorizontalAlignment="Left" Height="25" Click="MenuItem_Click" />
@@ -35,18 +36,19 @@
                         <MenuItem Header="Обновить" HorizontalAlignment="Left" Height="25" />
                     </MenuItem>
                 </Menu>
-                <Image Grid.Column="1" Source="/3224985.png" />
+                <Rectangle Grid.Column="1" Stroke="#FFA4A2A2"/>
+                <Image Grid.Column="1" Source="/3224985.png" Margin="3" />
             </Grid>
-            
-            <Grid Grid.Row="1" Grid.Column="0">
+            <Grid Grid.Row="1" Grid.Column="0" Background="#FFECECEC">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
                     <RowDefinition/>
-                    <RowDefinition Height="25"/>
                 </Grid.RowDefinitions>
+                <TextBox x:Name="TextBoxSearch" Grid.Row="0" Grid.Column="0" BorderBrush="#FFA4A2A2" Padding="0" SelectionBrush="#FFA4A2A2" Background="#FFECECEC" BorderThickness="1,0" VerticalContentAlignment="Stretch" KeyUp="TextBox_KeyUp" />
+                <TreeView x:Name="TreeViewTools" Grid.Row="1" Grid.Column="0" Background="#FFECECEC" BorderThickness="1,1,1,0" Padding="0"/>
             </Grid>
-            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="#FFDC861F">
-                
+            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="#FFECECEC">
+                <Rectangle Stroke="#FFA4A2A2"/>
             </Grid>
         </Grid>
 

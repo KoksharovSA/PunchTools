@@ -22,15 +22,19 @@ namespace PunchTools
     /// </summary>
     public partial class MainWindow : Window
     {
+        Collection<Tools> toolsBase;
         public MainWindow()
         {
             InitializeComponent();
-            ReadToolsInDB();
+            toolsBase = DB.ReadDBTools(new SQLiteConnection("Data source=C:\\Users\\User\\Desktop\\PunchTools.db;Version=3"));
+            TreeViewAddComponent(toolsBase);
+            FillInWrapPanel(toolsBase);           
         }
 
-        public void ReadToolsInDB()
-        {            
-            foreach (var item in DB.ReadDBTools(new SQLiteConnection("Data source=C:/Users/KoksharovSA/Desktop/PunchTools.db; Version=3")))
+        public void FillInWrapPanel(IEnumerable<Tools> tools)
+        {
+            ToolsWrapPanel.Children.Clear();
+            foreach (var item in tools)
             {
                 ToolsWrapPanel.Children.Add(item.CreateFormTools());
             }            
@@ -44,6 +48,47 @@ namespace PunchTools
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
+        public void TreeViewAddComponent(IEnumerable<Tools> tools)
+        {
+            TreeViewTools.Items.Clear();
+            TreeViewItem treeViewItem = new TreeViewItem();
+            treeViewItem.Header = "Все";
+            treeViewItem.MouseLeftButtonUp += (object sender, MouseButtonEventArgs e) =>
+            {
+                FillInWrapPanel(tools);
+            };
+            TreeViewTools.Items.Add(treeViewItem);
+            foreach (var item in tools.Select(x=>x.TypeTools).Distinct())
+            {
+                TreeViewItem treeViewItem1 = new TreeViewItem();
+                treeViewItem1.Header = item;
+                treeViewItem1.MouseLeftButtonUp += (object sender, MouseButtonEventArgs e) =>
+                {
+                    FillInWrapPanel(tools.Where(x=>x.TypeTools.Contains(item)));
+                };
+                TreeViewTools.Items.Add(treeViewItem1);
+            }
+        }
+
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (TextBoxSearch.Text != "" && TextBoxSearch.Text != " ")
+            {
+                TreeViewAddComponent(toolsBase.Where(x=>x.NameTools.Contains(TextBoxSearch.Text) || x.NomenclatureNumberTools.Contains(TextBoxSearch.Text) || x.Note.Contains(TextBoxSearch.Text)));
+                FillInWrapPanel(toolsBase.Where(x => x.NameTools.Contains(TextBoxSearch.Text) || x.NomenclatureNumberTools.Contains(TextBoxSearch.Text) || x.Note.Contains(TextBoxSearch.Text)));
+            }
+            else
+            {
+                TreeViewAddComponent(toolsBase);
+                FillInWrapPanel(toolsBase);
+            }
         }
     }
 }

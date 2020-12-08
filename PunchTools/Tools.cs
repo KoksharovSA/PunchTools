@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -18,9 +20,9 @@ namespace PunchTools
         {
         }
 
-        public Tools(int nomenclatureNumberTools, string nameTools, string dirFotoTools, string typeTools, string sizesTools, int quantity, int minQuantity, double mainSize, double minMainSize)
+        public Tools(string nomenclatureNumberTools, string nameTools, string dirFotoTools, string typeTools, string sizesTools, int quantity, int minQuantity, double mainSize, double minMainSize)
         {
-            NomenclatureNumberTools = nomenclatureNumberTools;
+            NomenclatureNumberTools = nomenclatureNumberTools ?? throw new ArgumentNullException(nameof(nomenclatureNumberTools));
             NameTools = nameTools ?? throw new ArgumentNullException(nameof(nameTools));
             TypeTools = typeTools ?? throw new ArgumentNullException(nameof(typeTools));
             SizesTools = sizesTools ?? throw new ArgumentNullException(nameof(sizesTools));
@@ -30,7 +32,7 @@ namespace PunchTools
             MinMainSize = minMainSize;
         }
 
-        public int NomenclatureNumberTools { get; set; }
+        public string NomenclatureNumberTools { get; set; }
         public string NameTools { get; set; }
         public string TypeTools { get; set; }
         public string SizesTools { get; set; }
@@ -38,6 +40,7 @@ namespace PunchTools
         public int MinQuantity { get; set; }
         public double MainSize { get; set; }
         public double MinMainSize { get; set; }
+        public string Note { get; set; }
 
         public Grid CreateFormTools()
         {
@@ -70,6 +73,13 @@ namespace PunchTools
             bitmap.EndInit();
             image.Source = bitmap;
             image.Height = 150;
+            image.MouseLeftButtonDown += (object sender, MouseButtonEventArgs e) => 
+            {
+                if (e.ClickCount == 2)
+                {
+                    Process.Start(Directory.GetCurrentDirectory() + "\\IMG\\" + NomenclatureNumberTools + ".jpg");
+                }
+            };
 
             panel.Children.Add(new TextBlock() { Text = NomenclatureNumberTools.ToString() }) ;
             panel.Children.Add(image);
@@ -78,6 +88,7 @@ namespace PunchTools
             panel.Children.Add(new TextBlock() { Text = "Размеры: " + SizesTools });
             panel.Children.Add(new TextBlock() { Text = "Количество: " + Quantity });
             panel.Children.Add(new TextBlock() { Text = "Осталось переточек: " + Math.Round(((MainSize - MinMainSize) / 0.2),0).ToString() });
+            panel.Children.Add(new TextBlock() { Text = "Примечание: " +  Note, TextWrapping = TextWrapping.Wrap });
 
             rectangle.Stroke = (Quantity - MinQuantity) <= 0 ? Brushes.Red : Brushes.Green;
             rectangle.Stroke = ((MainSize - MinMainSize)/0.2) <= 3 ? Brushes.Red : Brushes.Green;
